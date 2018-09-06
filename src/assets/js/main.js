@@ -59,10 +59,13 @@ function loadResCallBack() {
     console.log('init');
 
     var geo = new THREE.PlaneBufferGeometry(40, 40);
+    var uniforms={
+        bogTex:noiseTexture
+    };
     shaderMaterial = new THREE.ShaderMaterial({
         uniforms: uniforms,
-        vertexShader: document.getElementById("burnVertexShader").textContent,
-        fragmentShader: document.getElementById("burnFragmentShader").textContent
+        vertexShader: document.getElementById("fogVertexShader").textContent,
+        fragmentShader: document.getElementById("fogFragmentShader").textContent
     });
     shaderMaterial.transparent = !0;
     var paper = new THREE.Mesh(geo, shaderMaterial);
