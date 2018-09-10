@@ -59,8 +59,11 @@ function loadResCallBack() {
     console.log('init');
 
     var geo = new THREE.PlaneBufferGeometry(40, 40);
-    var uniforms={
-        bogTex:noiseTexture
+    // var uniforms={
+    //     iChannel0:  { type: 't', value: THREE.ImageUtils.loadTexture( 'textures/tex07.jpg') }
+    // };
+     var uniforms={
+        iChannel0:  { type: 't', value: noiseTexture }
     };
     shaderMaterial = new THREE.ShaderMaterial({
         uniforms: uniforms,
