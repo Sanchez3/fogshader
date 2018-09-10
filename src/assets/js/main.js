@@ -62,8 +62,16 @@ function loadResCallBack() {
     // var uniforms={
     //     iChannel0:  { type: 't', value: THREE.ImageUtils.loadTexture( 'textures/tex07.jpg') }
     // };
-     var uniforms={
-        iChannel0:  { type: 't', value: noiseTexture }
+    var uniforms = {
+        iTime: {
+            type: "f",
+            value: 1.0
+        },
+        iResolution: {
+            type: "v2",
+            value: new THREE.Vector2()
+        },
+        iChannel0: { type: 't', value: noiseTexture }
     };
     shaderMaterial = new THREE.ShaderMaterial({
         uniforms: uniforms,
