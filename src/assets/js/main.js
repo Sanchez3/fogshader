@@ -22,14 +22,7 @@ var container, stats;
 var camera, scene, renderer;
 var shaderMaterial;
 var manager;
-var noiseTexture;
-var params = {
-    burnTexture: 'burningTexture1',
-    burnProgress: 0,
-    burnEffect: { value: 1 },
-    isDepth: { value: 0 },
-    map: { value: null }
-};
+var noiseTexture, islandJson, mapTexture;
 
 
 function initLoad() {
@@ -82,6 +75,14 @@ function loadResCallBack() {
     var paper = new THREE.Mesh(geo, shaderMaterial);
     paper.position.set(0, 0, 0);
     scene.add(paper);
+
+    var mapmaterial = new THREE.MeshLambertMaterial({
+        map: mapTexture
+    });
+    var islandMesh = new THREE.Mesh(islandJson, mapmaterial);
+    islandMesh.position.set(270, 0, -300);
+    islandMesh.scale.set(1.5, 1.5, 1.5);
+    scene.add(islandMesh);
 }
 
 function initThree() {
@@ -103,21 +104,19 @@ function initThree() {
     // uniform float cameraFar;
 
     // Textures
-
+   
     var textureLoader = new THREE.TextureLoader(manager);
+     // var jsonLoader = new THREE.JSONLoader(manager);
     noiseTexture = textureLoader.load('/assets/img/noise.png');
+    mapTexture = textureLoader.load('/assets/img/color.jpg');
 
-
-
-
-
+    // islandJson = jsonLoader.load('/assets/img/island.json');
     //renderer
     var container = document.getElementById('container');
     renderer = new THREE.WebGLRenderer();
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     container.appendChild(renderer.domElement);
-
 }
 
 function initEvent() {
