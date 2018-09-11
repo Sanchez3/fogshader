@@ -22,7 +22,7 @@ var container, stats;
 var camera, scene, renderer;
 var shaderMaterial;
 var manager;
-var noiseTexture, islandJson, mapTexture;
+var noiseTexture, islandJson, mapTexture, catTexture;
 
 
 function initLoad() {
@@ -76,20 +76,21 @@ function loadResCallBack() {
     paper.position.set(0, 0, 0);
     scene.add(paper);
 
-    var mapmaterial = new THREE.MeshLambertMaterial({
-        map: mapTexture
+    var smaterial = new THREE.SpriteMaterial({
+        map: catTexture,
+        color: 0xffffff
     });
-    var islandMesh = new THREE.Mesh(islandJson, mapmaterial);
-    islandMesh.position.set(270, 0, -300);
-    islandMesh.scale.set(1.5, 1.5, 1.5);
-    scene.add(islandMesh);
+    var catMesh = new THREE.Sprite(smaterial);
+    catMesh.position.set(0, 0, 0);
+    catMesh.scale.set(3, 3, 3);
+    scene.add(catMesh);
 }
 
 function initThree() {
 
     // CAMERAS
 
-    camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);
+    camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 1000);
     camera.position.z = 80;
 
     // SCENE
@@ -104,12 +105,12 @@ function initThree() {
     // uniform float cameraFar;
 
     // Textures
-   
+
     var textureLoader = new THREE.TextureLoader(manager);
-     // var jsonLoader = new THREE.JSONLoader(manager);
+    // var jsonLoader = new THREE.JSONLoader(manager);
     noiseTexture = textureLoader.load('/assets/img/noise.png');
     mapTexture = textureLoader.load('/assets/img/color.jpg');
-
+    catTexture = textureLoader.load('/assets/img/cat.png');
     // islandJson = jsonLoader.load('/assets/img/island.json');
     //renderer
     var container = document.getElementById('container');
